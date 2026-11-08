@@ -15,9 +15,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Amra Nadaf — AI Product Engineer</title>
-<meta name="description" content="Amra Nadaf — AI Product Engineer at Bookleaf Publishing. Serverless pipelines, print-on-demand and marketplace integrations, applied computer vision.">
-<meta property="og:title" content="Amra Nadaf — AI Product Engineer">
+<title>Amra Nadaf | AI Product Engineer</title>
+<meta name="description" content="Amra Nadaf | AI Product Engineer at Bookleaf Publishing. Serverless pipelines, print-on-demand and marketplace integrations, applied computer vision.">
+<meta property="og:title" content="Amra Nadaf | AI Product Engineer">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -840,7 +840,7 @@ h1{font-size:clamp(1.9rem,4.3vw,3.1rem);font-weight:700;line-height:1.02;letter-
     </div>
     <div class="imid">
       <p>I'm the only AI engineer at Bookleaf Publishing, so I own design, build, deployment
-        and support for every AI and integration system we run — from the print pipeline that
+        and support for every AI and integration system we run, from the print pipeline that
         replaced our fulfilment vendor, to RAG chatbots handling tens of thousands of
         conversations a month, to a serverless audiobook platform I built on my own.</p>
       <p>Before that I was a performance engineer, load-testing banking systems. That's why I
@@ -870,7 +870,7 @@ h1{font-size:clamp(1.9rem,4.3vw,3.1rem);font-weight:700;line-height:1.02;letter-
       <div class="hdesc">
         <p>Automated workflow that takes book orders from every sales channel, converts and
           validates the print files, and sends them to Lulu for printing and fulfilment across
-          the US and Indian marketplaces — with Ingram removed from the chain.</p>
+          the US and Indian marketplaces with Ingram removed from the chain.</p>
       </div>
       <div class="hstats">
         <div><span class="sv">250</span><span class="sl">titles printed<br>per month</span></div>
@@ -1120,7 +1120,7 @@ h1{font-size:clamp(1.9rem,4.3vw,3.1rem);font-weight:700;line-height:1.02;letter-
     <div class="chatwrap rv">
       <div class="chatbox">
         <div class="thread" id="thread" aria-live="polite">
-          <div class="msg bot">Ask me anything about the systems I've built — how they work,
+          <div class="msg bot">Ask me anything about the systems I've built, how they work,
             what I chose and why, or where they broke.</div>
         </div>
         <div class="chips" id="chips">
@@ -1136,7 +1136,7 @@ h1{font-size:clamp(1.9rem,4.3vw,3.1rem);font-weight:700;line-height:1.02;letter-
       <div class="chatside">
         <span class="mono">Retrieval over the write-ups on this page and my résumé.</span>
         <p style="font-size:.85rem;color:var(--ink-2);margin-top:12px">Not connected to its
-          backend yet — it says so rather than guessing. Everything it will answer from is
+          backend yet, it says so rather than guessing. Everything it will answer from is
           written up above.</p>
       </div>
     </div>
@@ -1200,7 +1200,7 @@ const PROJECTS=[
   flow:['Order','Book PDF','Lambda (Docker)','Lulu press','Customer'],
   sections:[
    {h:'The problem',p:'Every printed book went through Ingram, who handled printing, shipping and handling and charged for the privilege. Their cut was roughly half the profit on every book — worth more than any efficiency gain elsewhere in the pipeline.'},
-   {h:'How it works',p:'Lulu won\'t accept an arbitrary PDF — print jobs must arrive in a specific format, so this was never a matter of forwarding an order. I wrote AWS Lambda functions, packaged as Docker images, that convert the incoming book PDF into Lulu\'s print-ready format before the order is submitted. It runs against Amazon, Shopify and Wix storefronts in both marketplaces, and I extended the internal bulk-order dashboard to route through the same path.'},
+   {h:'How it works',p:'Lulu won\'t accept an arbitrary PDF, print jobs must arrive in a specific format, so this was never a matter of forwarding an order. I wrote AWS Lambda functions, packaged as Docker images, that convert the incoming book PDF into Lulu\'s print-ready format before the order is submitted. It runs against Amazon, Shopify and Wix storefronts in both marketplaces, and I extended the internal bulk-order dashboard to route through the same path.'},
    {h:'Decisions I\'d defend',p:'<b>Container images over Lambda layers.</b> The conversion needs Ghostscript and several other PDF tools, and that dependency set doesn\'t fit inside a Lambda layer — layers are size-capped and can\'t be expanded, so building around them would have meant stripping the toolchain down to whatever squeezed in and hoping it held. A container image gives the job room for what it actually needs, and the environment is reproducible rather than assembled from whatever fit.'},
    {h:'What it changed',p:'Ingram is out of the chain and we deal with the customer directly. Per-order margin went up <b>30%</b>, across roughly <b>250 titles a month</b>.'}],
   todos:[],
@@ -1210,7 +1210,7 @@ const PROJECTS=[
   short:'A serverless platform letting authors turn their own poetry books into narrated audiobooks. Built solo, end to end.',
   flow:['Bubble session','Voice demo','SQS','Worker × poem','Music','Audiobook'],
   sections:[
-   {h:'What an author does',p:'They hear four voices first — two male, two female — and pick the one their book gets read in. The book goes into a queue; producing one takes around twenty minutes, so they can wait or close the tab and get notified. From there they can re-record up to twice, correct pronunciation, or prompt for a different tone. Last they choose background music and hear it under their own poems before committing. The finished file opens with the title and author name and closes on company branding.'},
+   {h:'What an author does',p:'They hear four voices first: two male, two female: and pick the one their book gets read in. The book goes into a queue; producing one takes around twenty minutes, so they can wait or close the tab and get notified. From there they can re-record up to twice, correct pronunciation, or prompt for a different tone. Last they choose background music and hear it under their own poems before committing. The finished file opens with the title and author name and closes on company branding.'},
    {h:'The constraint that shaped it',p:'A Lambda invocation is capped at fifteen minutes. A book takes about twenty. So the platform splits in two: an API Lambda that accepts the job and a worker Lambda that narrates, decoupled by an <b>SQS queue</b>. The book is chunked poem by poem and each poem goes to <b>Gemini TTS</b> as its own call, so no single invocation runs long. Because each poem is its own queued message, a failure retries on its own, up to three times, without restarting the book. Finished audio is written to S3 and served from there.'},
    {h:'Decisions I\'d defend',p:'<b>The handoff is invisible.</b> The main site runs on Bubble, the platform runs on AWS, and an author shouldn\'t have to notice or log in twice. I carry the session across from Bubble via a session token and cookie, so the author moves between two entirely different stacks without seeing a seam.'}],
   todos:[],
@@ -1455,7 +1455,7 @@ const EARLIER=[
 /* chat */
 async function askBackend(question){
   return "This assistant isn't connected to its backend yet. Everything it will answer from is "
-       + "written up on this page — open any project above, or email nadafamra@gmail.com.";
+       + "written up on this page, open any project above, or email nadafamra@gmail.com.";
 }
 (function(){
   const thread=$('#thread'),input=$('#input'),send=$('#send'),chips=$('#chips');
